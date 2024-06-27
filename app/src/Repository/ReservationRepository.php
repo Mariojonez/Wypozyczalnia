@@ -1,4 +1,7 @@
 <?php
+/**
+ * Reservation repository.
+ */
 
 namespace App\Repository;
 
@@ -11,6 +14,11 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ReservationRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructor.
+     *
+     * @param ManagerRegistry $registry Manager registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reservation::class);

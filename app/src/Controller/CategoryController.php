@@ -34,11 +34,8 @@ class CategoryController extends AbstractController
      * @param TaskServiceInterface     $taskService     Task service
      * @param TranslatorInterface      $translator      Translator
      */
-    public function __construct(
-        CategoryServiceInterface $categoryService,
-        TaskServiceInterface $taskService,
-        TranslatorInterface $translator
-    ) {
+    public function __construct(CategoryServiceInterface $categoryService, TaskServiceInterface $taskService, TranslatorInterface $translator)
+    {
         $this->categoryService = $categoryService;
         $this->taskService = $taskService;
         $this->translator = $translator;
@@ -46,6 +43,8 @@ class CategoryController extends AbstractController
 
     /**
      * Index action.
+     *
+     * @param Request $request The HTTP request
      *
      * @return Response HTTP response
      */

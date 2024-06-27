@@ -44,8 +44,7 @@ class TaskService implements TaskServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int  $page   Page number
-     * @param User $author Author
+     * @param int $page Page number
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
@@ -87,6 +86,9 @@ class TaskService implements TaskServiceInterface
     /**
      * Get task by category.
      *
+     * @param Category $category Category
+     *
+     * @return array Array of tasks
      */
     public function getTasksByCategory(Category $category): array
     {

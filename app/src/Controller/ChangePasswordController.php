@@ -1,4 +1,7 @@
 <?php
+/**
+ * Change password controller.
+ */
 
 namespace App\Controller;
 
@@ -13,21 +16,32 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Class ChangePasswordController.
+ */
 class ChangePasswordController extends AbstractController
 {
     /**
      * Constructor.
+     *
+     * @param TranslatorInterface $translator Translator
      */
     public function __construct(private readonly TranslatorInterface $translator)
     {
     }
 
+    /**
+     * Index action.
+     *
+     * @param Request                     $request        The HTTP request
+     * @param UserPasswordHasherInterface $passwordHasher Password hasher
+     * @param EntityManagerInterface      $entityManager  Entity manager
+     *
+     * @return Response HTTP response
+     */
     #[Route('/change-password', name: 'change_password')]
-    public function changePassword(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $entityManager
-    ): Response {
+    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    {
         $user = $this->getUser();
 
         // Ensure the user is logged in
@@ -43,6 +57,7 @@ class ChangePasswordController extends AbstractController
             $currentPassword = $form->get('currentPassword')->getData();
             if (!$passwordHasher->isPasswordValid($user, $currentPassword)) {
                 $this->addFlash('error', $this->translator->trans('message.password_does_not_match'));
+
                 return $this->redirectToRoute('change_password');
             }
 
@@ -53,6 +68,7 @@ class ChangePasswordController extends AbstractController
             // Check if new password matches confirmed new password
             if ($newPassword !== $confirmNewPassword) {
                 $this->addFlash('error', $this->translator->trans('message.confirm_password_does_not_match'));
+
                 return $this->redirectToRoute('change_password');
             }
 

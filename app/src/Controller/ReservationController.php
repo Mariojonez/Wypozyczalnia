@@ -1,4 +1,7 @@
 <?php
+/**
+ * Reservation controller.
+ */
 
 namespace App\Controller;
 
@@ -14,6 +17,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Class ReservationController.
+ */
 class ReservationController extends AbstractController
 {
     /**
@@ -22,12 +28,26 @@ class ReservationController extends AbstractController
     private TranslatorInterface $translator;
     private EntityManagerInterface $entityManager;
 
+    /**
+     * Constructor.
+     *
+     * @param TranslatorInterface    $translator    Translator
+     * @param EntityManagerInterface $entityManager Entity manager
+     */
     public function __construct(TranslatorInterface $translator, EntityManagerInterface $entityManager)
     {
         $this->translator = $translator;
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Creates a new reservation.
+     *
+     * @param Request                $request       The HTTP request
+     * @param EntityManagerInterface $entityManager The entity manager
+     *
+     * @return Response HTTP response
+     */
     #[Route('/reservation/new', name: 'reservation_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -48,7 +68,7 @@ class ReservationController extends AbstractController
             $selectedTask = $form->get('task')->getData();
             $reservation->setTask($selectedTask);
 
-            $reservation->setStatus('pending');
+            $reservation->setStatus('label.pending');
 
             $entityManager->persist($reservation);
             $entityManager->flush();
@@ -66,6 +86,13 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    /**
+     * Lists all reservations.
+     *
+     * @param EntityManagerInterface $entityManager The entity manager
+     *
+     * @return Response HTTP response
+     */
     #[Route('/reservations', name: 'reservation_list')]
     public function list(EntityManagerInterface $entityManager): Response
     {
@@ -94,8 +121,8 @@ class ReservationController extends AbstractController
     /**
      * Change status action.
      *
-     * @param Request $request HTTP request
-     * @param Reservation    $reservation   Reservation entity
+     * @param Request     $request     HTTP request
+     * @param Reservation $reservation Reservation entity
      *
      * @return Response HTTP response
      */

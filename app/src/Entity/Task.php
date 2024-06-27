@@ -231,26 +231,26 @@ class Task
         $this->tags->removeElement($tag);
     }
 
+    /**
+     * Get the author of this entity.
+     *
+     * @return User|null The author of this entity, or null if not set.
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * Set the author of this entity.
+     *
+     * @param User|null $author The author to set for this entity.
+     *
+     * @return static
+     */
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

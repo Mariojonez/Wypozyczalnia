@@ -1,4 +1,7 @@
 <?php
+/**
+ * Task voter.
+ */
 
 namespace App\Security\Voter;
 
@@ -131,8 +134,8 @@ class TaskVoter extends Voter
     /**
      * Checks if user can view task.
      *
-     * @param mixed          $subject Subject entity
-     * @param UserInterface  $user    User
+     * @param mixed         $subject Subject entity
+     * @param UserInterface $user    User
      *
      * @return bool Result
      */

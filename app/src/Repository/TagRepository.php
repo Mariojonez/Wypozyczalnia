@@ -59,5 +59,4 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->remove($task);
         $this->_em->flush();
     }
-
 }

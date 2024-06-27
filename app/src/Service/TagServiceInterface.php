@@ -7,11 +7,11 @@ namespace App\Service;
 
 use App\Entity\Tag;
 
-
 /**
  * Interface TaskServiceInterface.
  */
-interface TagServiceInterface{
+interface TagServiceInterface
+{
     /**
      * Find by title.
      *

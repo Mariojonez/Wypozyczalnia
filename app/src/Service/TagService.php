@@ -1,13 +1,18 @@
 <?php
+/**
+ * Tag service.
+ */
+
 namespace App\Service;
+
 use App\Entity\Tag;
 use App\Repository\TagRepository;
-
 
 /**
  * Class TaskService.
  */
-class TagService implements TagServiceInterface{
+class TagService implements TagServiceInterface
+{
     /**
      * Constructor.
      *
@@ -37,5 +42,4 @@ class TagService implements TagServiceInterface{
     {
         $this->tagRepository->save($tag);
     }
-
 }

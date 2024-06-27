@@ -1,4 +1,7 @@
 <?php
+/**
+ * Reservation entity.
+ */
 
 namespace App\Entity;
 
@@ -7,6 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Class Reservation.
+ */
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 class Reservation
 {
@@ -59,9 +65,17 @@ class Reservation
         return $this->id;
     }
 
+    /**
+     * Setter for Id.
+     *
+     * @param int|null $id Id
+     *
+     * @return static
+     */
     public function setId(int $id): static
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -108,7 +122,7 @@ class Reservation
     /**
      * Getter for comment.
      *
-     * @return string|null Comment
+     * @return string|null comment
      */
     public function getComment(): ?string
     {
@@ -118,11 +132,14 @@ class Reservation
     /**
      * Setter for comment.
      *
-     * @param string|null $comment Comment
+     * @param string|null $comment comment
+     *
+     * @return static
      */
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
+
         return $this;
     }
 
@@ -140,10 +157,13 @@ class Reservation
      * Setter for status.
      *
      * @param string $status Status
+     *
+     * @return static
      */
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
         return $this;
     }
 }

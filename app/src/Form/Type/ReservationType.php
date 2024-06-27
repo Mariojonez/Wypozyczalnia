@@ -1,4 +1,7 @@
 <?php
+/**
+ * Reservation type.
+ */
 
 namespace App\Form\Type;
 
@@ -12,13 +15,32 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class ReservationType.
+ */
 class ReservationType extends AbstractType
 {
+    /**
+     * Constructor.
+     *
+     * @param string|null $userEmail Optional email address for initialization
+     */
     public function __construct(string $userEmail = null)
     {
         $this->userEmail = $userEmail;
     }
 
+    /**
+     * Builds the form.
+     *
+     * This method is called for each type in the hierarchy starting from the
+     * top most type. Type extensions can further modify the form.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array<string, mixed> $options Form options
+     *
+     * @see FormTypeExtensionInterface::buildForm()
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -49,10 +71,9 @@ class ReservationType extends AbstractType
             [
                 'label' => 'label.status',
                 'choices' => [
-                    'label.pending' => 'label.pending',
+                    'label.pending' => 'label',
                 ],
-                'disabled' => true, // Status field is disabled
-                'data' => 'label.pending', // Default value for status
+                'disabled' => true,
                 'attr' => ['class' => 'form-control'],
             ]
         )
@@ -66,6 +87,11 @@ class ReservationType extends AbstractType
         );
     }
 
+    /**
+     * Configures the options for this type.
+     *
+     * @param OptionsResolver $resolver The resolver for the options
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

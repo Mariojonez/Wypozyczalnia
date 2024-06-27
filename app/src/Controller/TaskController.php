@@ -26,8 +26,11 @@ class TaskController extends AbstractController
 {
     /**
      * Constructor.
+     *
+     * @param TaskService         $taskService The task service used for task-related operations.
+     * @param TranslatorInterface $translator  The translator service for translating messages.
      */
-    public function __construct(private readonly TaskServiceInterface $taskService,  private readonly TranslatorInterface $translator)
+    public function __construct(private readonly TaskServiceInterface $taskService, private readonly TranslatorInterface $translator)
     {
     }
 
@@ -62,7 +65,6 @@ class TaskController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
-    // #[IsGranted('VIEW', subject: 'task')]
     public function show(Task $task): Response
     {
 //        if ($task->getAuthor() !== $this->getUser()) {
