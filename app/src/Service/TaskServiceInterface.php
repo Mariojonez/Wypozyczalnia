@@ -7,7 +7,6 @@ namespace App\Service;
 
 use App\Entity\Category;
 use App\Entity\Task;
-use App\Entity\User;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 
 /**
@@ -40,8 +39,6 @@ interface TaskServiceInterface
 
     /**
      * Get tasks by category.
-     *
-     * @param Category $category
      *
      * @return Task[]
      */

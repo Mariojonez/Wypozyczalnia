@@ -33,12 +33,12 @@ class ChangeStatusType extends AbstractType
             'status',
             ChoiceType::class,
             [
-            'choices' => [
-                'label.pending' => 'label.pending',
-                'label.accepted' => 'label.accepted',
-                'label.cancelled' => 'label.cancelled',
+                'choices' => [
+                    'label.pending' => 'label.pending',
+                    'label.accepted' => 'label.accepted',
+                    'label.cancelled' => 'label.cancelled',
                 ],
-            'label' => 'label.status',
+                'label' => 'label.status',
             ]
         );
     }

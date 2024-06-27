@@ -7,7 +7,6 @@ namespace App\Entity;
 
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,8 +17,6 @@ class Reservation
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,8 +25,6 @@ class Reservation
 
     /**
      * User.
-     *
-     * @var User
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[Assert\Type(User::class)]
@@ -39,8 +34,6 @@ class Reservation
 
     /**
      * Task.
-     *
-     * @var Task
      */
     #[ORM\ManyToOne(targetEntity: Task::class, fetch: 'EXTRA_LAZY')]
     #[Assert\Type(Task::class)]
@@ -69,8 +62,6 @@ class Reservation
      * Setter for Id.
      *
      * @param int|null $id Id
-     *
-     * @return static
      */
     public function setId(int $id): static
     {
@@ -133,8 +124,6 @@ class Reservation
      * Setter for comment.
      *
      * @param string|null $comment comment
-     *
-     * @return static
      */
     public function setComment(?string $comment): static
     {
@@ -157,8 +146,6 @@ class Reservation
      * Setter for status.
      *
      * @param string $status Status
-     *
-     * @return static
      */
     public function setStatus(string $status): static
     {

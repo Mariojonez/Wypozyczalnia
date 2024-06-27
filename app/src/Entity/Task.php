@@ -6,7 +6,6 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,8 +21,6 @@ class Task
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,28 +29,22 @@ class Task
 
     /**
      * Created at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt;
 
     /**
      * Updated at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updatedAt;
 
     /**
      * Title.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -63,8 +54,6 @@ class Task
 
     /**
      * Category.
-     *
-     * @var Category
      */
     #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EXTRA_LAZY')]
     #[Assert\Type(Category::class)]
@@ -84,8 +73,6 @@ class Task
 
     /**
      * Author.
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -95,8 +82,6 @@ class Task
 
     /**
      * Author.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $status = 'available';
@@ -234,7 +219,7 @@ class Task
     /**
      * Get the author of this entity.
      *
-     * @return User|null The author of this entity, or null if not set.
+     * @return User|null the author of this entity, or null if not set
      */
     public function getAuthor(): ?User
     {
@@ -244,9 +229,7 @@ class Task
     /**
      * Set the author of this entity.
      *
-     * @param User|null $author The author to set for this entity.
-     *
-     * @return static
+     * @param User|null $author the author to set for this entity
      */
     public function setAuthor(?User $author): static
     {

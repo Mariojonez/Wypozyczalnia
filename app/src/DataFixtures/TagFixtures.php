@@ -5,11 +5,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Enum\UserRole;
 use App\Entity\Tag;
-use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Faker\Generator;
 
 /**
  * Class TagFixtures.

@@ -21,6 +21,7 @@ class TagService implements TagServiceInterface
     public function __construct(private readonly TagRepository $tagRepository)
     {
     }
+
     /**
      * Find by title.
      *

@@ -25,7 +25,7 @@ class ReservationType extends AbstractType
      *
      * @param string|null $userEmail Optional email address for initialization
      */
-    public function __construct(string $userEmail = null)
+    public function __construct(?string $userEmail = null)
     {
         $this->userEmail = $userEmail;
     }

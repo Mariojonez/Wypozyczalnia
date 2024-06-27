@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class AdminReservationController
+ * Class AdminReservationController.
  *
  * Controller for managing reservations by admin.
  */

@@ -7,7 +7,6 @@ namespace App\Service;
 
 use App\Entity\Category;
 use App\Entity\Task;
-use App\Entity\User;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -19,7 +18,6 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class TaskService implements TaskServiceInterface
 {
-
     /**
      * Items per page.
      *

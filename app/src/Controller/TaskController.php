@@ -2,6 +2,7 @@
 /**
  * Task controller.
  */
+
 namespace App\Controller;
 
 use App\Entity\Task;
@@ -27,8 +28,8 @@ class TaskController extends AbstractController
     /**
      * Constructor.
      *
-     * @param TaskService         $taskService The task service used for task-related operations.
-     * @param TranslatorInterface $translator  The translator service for translating messages.
+     * @param TaskService         $taskService the task service used for task-related operations
+     * @param TranslatorInterface $translator  the translator service for translating messages
      */
     public function __construct(private readonly TaskServiceInterface $taskService, private readonly TranslatorInterface $translator)
     {
@@ -67,14 +68,14 @@ class TaskController extends AbstractController
     )]
     public function show(Task $task): Response
     {
-//        if ($task->getAuthor() !== $this->getUser()) {
-//            $this->addFlash(
-//                'warning',
-//                $this->translator->trans('message.record_not_found')
-//            );
-//
-//            return $this->redirectToRoute('task_index');
-//        }
+        //        if ($task->getAuthor() !== $this->getUser()) {
+        //            $this->addFlash(
+        //                'warning',
+        //                $this->translator->trans('message.record_not_found')
+        //            );
+        //
+        //            return $this->redirectToRoute('task_index');
+        //        }
 
         return $this->render(
             'task/show.html.twig',

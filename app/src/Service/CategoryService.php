@@ -31,7 +31,6 @@ class CategoryService implements CategoryServiceInterface
      */
     private const PAGINATOR_ITEMS_PER_PAGE = 10;
 
-
     /**
      * Constructor.
      *
@@ -60,7 +59,7 @@ class CategoryService implements CategoryServiceInterface
     }
 
     /**
-    /**
+     * /**
      * Save entity.
      *
      * @param Category $category Category entity
@@ -74,6 +73,7 @@ class CategoryService implements CategoryServiceInterface
 
         $this->categoryRepository->save($category);
     }
+
     /**
      * Delete entity.
      *
@@ -86,6 +86,7 @@ class CategoryService implements CategoryServiceInterface
     {
         $this->categoryRepository->delete($category);
     }
+
     /**
      * Can Category be deleted?
      *

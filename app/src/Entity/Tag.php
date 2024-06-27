@@ -18,8 +18,6 @@ class Tag
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,8 +26,6 @@ class Tag
 
     /**
      * Created at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'create')]
@@ -37,8 +33,6 @@ class Tag
 
     /**
      * Updated at.
-     *
-     * @var \DateTimeImmutable|null
      */
     #[ORM\Column]
     #[Gedmo\Timestampable(on: 'update')]
