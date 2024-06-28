@@ -284,6 +284,19 @@
               <source>title.change_status</source>
               <target>Zmień status</target>
             </trans-unit>
+<!--             Lista użytkowników -->
+            <trans-unit id="action.user_list">
+              <source>action.user_list</source>
+              <target>Lista użytkowników</target>
+            </trans-unit>
+            <trans-unit id="title.user_list">
+              <source>title.user_list</source>
+              <target>Lista użytkowników</target>
+            </trans-unit>
+            <trans-unit id="label.role">
+              <source>label.role</source>
+              <target>Role</target>
+            </trans-unit>
     </body>
   </file>
 </xliff>

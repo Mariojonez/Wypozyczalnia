@@ -40,6 +40,8 @@ interface TaskServiceInterface
     /**
      * Get tasks by category.
      *
+     * @param Category $category Category
+     *
      * @return Task[]
      */
     public function getTasksByCategory(Category $category): array;

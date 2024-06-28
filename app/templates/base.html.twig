@@ -32,6 +32,11 @@
                     <a href="{{ url('app_login') }}" class="btn btn-secondary">{{ 'action.login'|trans }}</a>
                 {% endif %}
                 <a href="{{ path('change_password') }}" class="btn btn-secondary">{{ 'action.change_password'|trans }}</a>
+                {% if is_granted('LIST', app.user) %}
+                <a href="{{ url('user_list') }}" title="{{ 'action.user_list'|trans }}" class="btn btn-secondary">
+                    {{ 'action.user_list'|trans }}
+                </a>
+                {% endif %}
             </div>
         </div>
     </div>

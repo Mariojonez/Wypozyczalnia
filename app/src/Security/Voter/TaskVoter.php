@@ -8,6 +8,7 @@ namespace App\Security\Voter;
 use App\Entity\Category;
 use App\Entity\Task;
 use App\Entity\Reservation;
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -74,6 +75,13 @@ class TaskVoter extends Voter
     private const CHANGE_STATUS = 'CHANGE_STATUS';
 
     /**
+     * View list permission.
+     *
+     * @const string
+     */
+    private const LIST = 'LIST';
+
+    /**
      * Determines if the attribute and subject are supported by this voter.
      *
      * @param string $attribute An attribute
@@ -83,8 +91,8 @@ class TaskVoter extends Voter
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::CREATE, self::SHOW, self::EDIT_CATEGORY, self::DELETE_CATEGORY, self::CHANGE_STATUS])
-            && ($subject instanceof Task || $subject instanceof Category || $subject instanceof Reservation);
+        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::CREATE, self::SHOW, self::EDIT_CATEGORY, self::DELETE_CATEGORY, self::CHANGE_STATUS, self::LIST])
+            && ($subject instanceof Task || $subject instanceof Category || $subject instanceof Reservation || $subject instanceof User);
     }
 
     /**
@@ -114,6 +122,7 @@ class TaskVoter extends Voter
             self::EDIT_CATEGORY => $this->canEditCategory($subject, $user),
             self::DELETE_CATEGORY => $this->canDeleteCategory($subject, $user),
             self::CHANGE_STATUS => $this->canChangeStatus($subject, $user),
+            self::LIST => $this->canList($user),
             default => false,
         };
     }
@@ -216,6 +225,18 @@ class TaskVoter extends Voter
      * @return bool Result
      */
     private function canEditCategory(Category $category, UserInterface $user): bool
+    {
+        return $this->isAdmin($user);
+    }
+
+    /**
+     * Checks if user can view whole list.
+     *
+     * @param UserInterface $user User
+     *
+     * @return bool Result
+     */
+    private function canList(UserInterface $user): bool
     {
         return $this->isAdmin($user);
     }

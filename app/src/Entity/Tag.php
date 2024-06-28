@@ -28,6 +28,7 @@ class Tag
      * Created at.
      */
     #[ORM\Column]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -35,6 +36,7 @@ class Tag
      * Updated at.
      */
     #[ORM\Column]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updatedAt = null;
 

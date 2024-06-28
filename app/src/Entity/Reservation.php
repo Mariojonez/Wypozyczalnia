@@ -42,9 +42,11 @@ class Reservation
     private ?Task $task = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $comment = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(max: 255)]
     #[Assert\NotBlank]
     private ?string $status = null;
 
@@ -63,11 +65,9 @@ class Reservation
      *
      * @param int|null $id Id
      */
-    public function setId(int $id): static
+    public function setId(int $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -124,6 +124,8 @@ class Reservation
      * Setter for comment.
      *
      * @param string|null $comment comment
+     *
+     * @return static
      */
     public function setComment(?string $comment): static
     {
@@ -146,6 +148,8 @@ class Reservation
      * Setter for status.
      *
      * @param string $status Status
+     *
+     * @return static
      */
     public function setStatus(string $status): static
     {
