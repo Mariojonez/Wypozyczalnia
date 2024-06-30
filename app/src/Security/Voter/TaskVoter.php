@@ -68,10 +68,18 @@ class TaskVoter extends Voter
     private const DELETE_CATEGORY = 'DELETE_CATEGORY';
 
     /**
+     * Create category permission.
+     *
+     * @const string
+     */
+    private const CREATE_CATEGORY = 'CREATE_CATEGORY';
+
+    /**
      * Change status permission.
      *
      * @const string
      */
+
     private const CHANGE_STATUS = 'CHANGE_STATUS';
 
     /**
@@ -91,7 +99,7 @@ class TaskVoter extends Voter
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::CREATE, self::SHOW, self::EDIT_CATEGORY, self::DELETE_CATEGORY, self::CHANGE_STATUS, self::LIST])
+        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::CREATE, self::SHOW, self::EDIT_CATEGORY, self::DELETE_CATEGORY, self::CREATE_CATEGORY, self::CHANGE_STATUS, self::LIST])
             && ($subject instanceof Task || $subject instanceof Category || $subject instanceof Reservation || $subject instanceof User);
     }
 
@@ -121,6 +129,7 @@ class TaskVoter extends Voter
             self::SHOW => $this->canView($subject, $user),
             self::EDIT_CATEGORY => $this->canEditCategory($subject, $user),
             self::DELETE_CATEGORY => $this->canDeleteCategory($subject, $user),
+            self::CREATE_CATEGORY => $this->canCreateCategory($user),
             self::CHANGE_STATUS => $this->canChangeStatus($subject, $user),
             self::LIST => $this->canList($user),
             default => false,
@@ -225,6 +234,18 @@ class TaskVoter extends Voter
      * @return bool Result
      */
     private function canEditCategory(Category $category, UserInterface $user): bool
+    {
+        return $this->isAdmin($user);
+    }
+
+    /**
+     * Checks if user can create category.
+     *
+     * @param UserInterface $user User
+     *
+     * @return bool Result
+     */
+    private function canCreateCategory(UserInterface $user): bool
     {
         return $this->isAdmin($user);
     }

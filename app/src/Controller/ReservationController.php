@@ -126,7 +126,7 @@ class ReservationController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/reservations/{id}/change-status', name: 'reservation_change_status', methods: ['GET'|'PUT'])]
+    #[Route('/reservations/{id}/change-status', name: 'reservation_change_status', methods: ['GET','PUT'])]
     #[IsGranted('CHANGE_STATUS', subject: 'reservation')]
     public function changeStatus(Request $request, Reservation $reservation): Response
     {
