@@ -124,8 +124,6 @@ class Reservation
      * Setter for comment.
      *
      * @param string|null $comment comment
-     *
-     * @return static
      */
     public function setComment(?string $comment): static
     {
@@ -148,8 +146,6 @@ class Reservation
      * Setter for status.
      *
      * @param string $status Status
-     *
-     * @return static
      */
     public function setStatus(string $status): static
     {

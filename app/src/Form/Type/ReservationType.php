@@ -21,6 +21,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ReservationType extends AbstractType
 {
     /**
+     * @var string|null
+     */
+    public $userEmail;
+    /**
      * Constructor.
      *
      * @param string|null $userEmail Optional email address for initialization

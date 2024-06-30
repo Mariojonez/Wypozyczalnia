@@ -6,7 +6,7 @@
 namespace App\Controller;
 
 use App\Form\Type\ChangePasswordType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,9 +24,10 @@ class ChangePasswordController extends AbstractController
     /**
      * Constructor.
      *
-     * @param TranslatorInterface $translator Translator
+     * @param TranslatorInterface $translator     Translator
+     * @param UserRepository      $userRepository User repository
      */
-    public function __construct(private readonly TranslatorInterface $translator)
+    public function __construct(private readonly TranslatorInterface $translator, private readonly UserRepository $userRepository)
     {
     }
 
@@ -35,12 +36,11 @@ class ChangePasswordController extends AbstractController
      *
      * @param Request                     $request        The HTTP request
      * @param UserPasswordHasherInterface $passwordHasher Password hasher
-     * @param EntityManagerInterface      $entityManager  Entity manager
      *
      * @return Response HTTP response
      */
-    #[Route('/change-password', name: 'change_password')]
-    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    #[\Symfony\Component\Routing\Attribute\Route('/change-password', name: 'change_password')]
+    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = $this->getUser();
 
@@ -77,9 +77,7 @@ class ChangePasswordController extends AbstractController
             $encodedPassword = $passwordHasher->hashPassword($user, $newPassword);
             $user->setPassword($encodedPassword);
 
-            // Save the updated user entity
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userRepository->save($user);
 
             $this->addFlash(
                 'success',

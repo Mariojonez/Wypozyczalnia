@@ -9,7 +9,6 @@ use App\Entity\Category;
 use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -86,7 +85,6 @@ class TaskRepository extends ServiceEntityRepository
      */
     public function save(Task $task): void
     {
-        assert($this->_em instanceof EntityManager);
         $this->_em->persist($task);
         $this->_em->flush();
     }
@@ -101,7 +99,6 @@ class TaskRepository extends ServiceEntityRepository
      */
     public function delete(Task $task): void
     {
-        assert($this->_em instanceof EntityManager);
         $this->_em->remove($task);
         $this->_em->flush();
     }

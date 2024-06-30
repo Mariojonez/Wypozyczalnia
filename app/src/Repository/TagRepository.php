@@ -7,7 +7,6 @@ namespace App\Repository;
 
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -39,7 +38,6 @@ class TagRepository extends ServiceEntityRepository
      */
     public function save(Tag $task): void
     {
-        assert($this->_em instanceof EntityManager);
         $this->_em->persist($task);
         $this->_em->flush();
     }
@@ -54,7 +52,6 @@ class TagRepository extends ServiceEntityRepository
      */
     public function delete(Tag $task): void
     {
-        assert($this->_em instanceof EntityManager);
         $this->_em->remove($task);
         $this->_em->flush();
     }

@@ -33,7 +33,7 @@ class Task
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?\DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt = null;
 
     /**
      * Updated at.
@@ -41,7 +41,7 @@ class Task
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?\DateTimeImmutable $updatedAt;
+    private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * Title.
@@ -50,7 +50,7 @@ class Task
     #[Assert\Type('string')]
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 255)]
-    private ?string $title;
+    private ?string $title = null;
 
     /**
      * Category.
@@ -59,7 +59,7 @@ class Task
     #[Assert\Type(Category::class)]
     #[Assert\NotBlank]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category;
+    private ?Category $category = null;
 
     /**
      * Tags.
@@ -78,7 +78,7 @@ class Task
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotBlank]
     #[Assert\Type(User::class)]
-    private ?User $author;
+    private ?User $author = null;
 
     /**
      * Author.
@@ -230,8 +230,6 @@ class Task
      * Set the author of this entity.
      *
      * @param User|null $author the author to set for this entity
-     *
-     * @return static
      */
     public function setAuthor(?User $author): static
     {

@@ -46,8 +46,7 @@ class TaskController extends AbstractController
     public function index(#[MapQueryParameter] int $page = 1): Response
     {
         $pagination = $this->taskService->getPaginatedList(
-            $page,
-            $this->getUser()
+            $page
         );
 
         return $this->render('task/index.html.twig', ['pagination' => $pagination]);

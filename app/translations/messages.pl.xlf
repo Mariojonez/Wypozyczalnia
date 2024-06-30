@@ -297,6 +297,11 @@
               <source>label.role</source>
               <target>Role</target>
             </trans-unit>
+<!--             Inne -->
+            <trans-unit id="message.category_contains_tasks">
+              <source>message.category_contains_tasks</source>
+              <target>Kategoria zawiera obiekty</target>
+            </trans-unit>
     </body>
   </file>
 </xliff>

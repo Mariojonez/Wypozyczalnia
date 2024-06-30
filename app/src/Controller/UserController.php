@@ -3,7 +3,6 @@
  * User controller.
  */
 
-
 namespace App\Controller;
 
 use App\Repository\UserRepository;
@@ -24,7 +23,7 @@ class UserController extends AbstractController
      * @param UserRepository $userRepository User repository
      * @param UserInterface  $user           Current user
      */
-    #[Route('/users', name: 'user_list', methods: ['GET'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/users', name: 'user_list', methods: ['GET'])]
     #[IsGranted('LIST', subject: 'user')]
     public function list(UserRepository $userRepository, UserInterface $user): Response
     {

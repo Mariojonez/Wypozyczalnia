@@ -79,7 +79,6 @@ class TaskVoter extends Voter
      *
      * @const string
      */
-
     private const CHANGE_STATUS = 'CHANGE_STATUS';
 
     /**
@@ -152,9 +151,7 @@ class TaskVoter extends Voter
     /**
      * Checks if user can view task.
      *
-     * @param mixed         $subject Subject entity
      * @param UserInterface $user    User
-     *
      * @return bool Result
      */
     private function canView(mixed $subject, UserInterface $user): bool

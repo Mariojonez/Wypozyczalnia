@@ -8,7 +8,7 @@ namespace App\Controller;
 use App\Entity\Reservation;
 use App\Form\Type\ChangeStatusType;
 use App\Form\Type\ReservationType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,40 +24,30 @@ class ReservationController extends AbstractController
 {
     /**
      * Constructor.
-     */
-    private TranslatorInterface $translator;
-    private EntityManagerInterface $entityManager;
-
-    /**
-     * Constructor.
      *
-     * @param TranslatorInterface    $translator    Translator
-     * @param EntityManagerInterface $entityManager Entity manager
+     * @param TranslatorInterface   $translator            Translator
+     * @param ReservationRepository $reservationRepository Reservation repository
      */
-    public function __construct(TranslatorInterface $translator, EntityManagerInterface $entityManager)
+    public function __construct(private readonly TranslatorInterface $translator, private readonly ReservationRepository $reservationRepository)
     {
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
     }
 
     /**
      * Creates a new reservation.
      *
-     * @param Request                $request       The HTTP request
-     * @param EntityManagerInterface $entityManager The entity manager
+     * @param Request $request The HTTP request
      *
      * @return Response HTTP response
      */
-    #[Route('/reservation/new', name: 'reservation_new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[\Symfony\Component\Routing\Attribute\Route('/reservation/new', name: 'reservation_new')]
+    public function new(Request $request): Response
     {
         $user = $this->getUser();
 
-        if (!$user) {
+        if (!$user instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             throw new AccessDeniedException('You must be logged in to create a reservation.');
         }
 
-        $user = $this->getUser();
         $reservation = new Reservation();
         $reservation->setUser($user);
 
@@ -70,8 +60,7 @@ class ReservationController extends AbstractController
 
             $reservation->setStatus('label.pending');
 
-            $entityManager->persist($reservation);
-            $entityManager->flush();
+            $this->reservationRepository->save($reservation);
 
             $this->addFlash(
                 'success',
@@ -89,28 +78,25 @@ class ReservationController extends AbstractController
     /**
      * Lists all reservations.
      *
-     * @param EntityManagerInterface $entityManager The entity manager
-     *
      * @return Response HTTP response
      */
-    #[Route('/reservations', name: 'reservation_list')]
-    public function list(EntityManagerInterface $entityManager): Response
+    #[\Symfony\Component\Routing\Attribute\Route('/reservations', name: 'reservation_list')]
+    public function list(): Response
     {
         // Get the current logged-in user
         $user = $this->getUser();
 
-        if (!$user) {
+        if (!$user instanceof \Symfony\Component\Security\Core\User\UserInterface) {
             throw $this->createAccessDeniedException('You must be logged in to view reservations.');
         }
 
         // Check if the user is an admin
         if ($this->isGranted('ROLE_ADMIN')) {
             // Fetch all reservations
-            $reservations = $entityManager->getRepository(Reservation::class)->findAll();
+            $reservations = $this->reservationRepository->findAll();
         } else {
             // Fetch reservations associated with the current user
-            $reservations = $entityManager->getRepository(Reservation::class)
-                ->findBy(['user' => $user]);
+            $reservations = $this->reservationRepository->findBy(['user' => $user]);
         }
 
         return $this->render('reservation/list.html.twig', [
@@ -126,7 +112,7 @@ class ReservationController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/reservations/{id}/change-status', name: 'reservation_change_status', methods: ['GET','PUT'])]
+    #[\Symfony\Component\Routing\Attribute\Route('/reservations/{id}/change-status', name: 'reservation_change_status', methods: ['GET', 'PUT'])]
     #[IsGranted('CHANGE_STATUS', subject: 'reservation')]
     public function changeStatus(Request $request, Reservation $reservation): Response
     {
@@ -141,8 +127,7 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($reservation);
-            $this->entityManager->flush();
+            $this->reservationRepository->save($reservation);
 
             $this->addFlash(
                 'success',
