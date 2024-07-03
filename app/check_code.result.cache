@@ -1,18 +1,11 @@
-   1) src/Controller/CategoryController.php (no_unused_imports)
-   2) src/Controller/ReservationController.php (no_unused_imports)
-   3) src/Controller/UserController.php (no_unused_imports)
-   4) src/Form/DataTransformer/TagsDataTransformer.php (fully_qualified_strict_types)
-   5) src/Form/Type/ReservationType.php (class_attributes_separation)
-   6) src/Form/Type/TaskType.php (function_declaration)
-   7) src/Security/Voter/TaskVoter.php (phpdoc_separation, phpdoc_align)
 
-Found 7 of 38 files that can be fixed in 1.462 seconds, 18.00 MB memory used
+Found 0 of 38 files that can be fixed in 1.483 seconds, 18.00 MB memory used
 
 FILE: /home/wwwroot/app/src/Controller/UserController.php
 ----------------------------------------------------------------------
 FOUND 1 ERROR AFFECTING 1 LINE
 ----------------------------------------------------------------------
- 25 | ERROR | Missing @return tag in function comment
+ 24 | ERROR | Missing @return tag in function comment
 ----------------------------------------------------------------------
 
 
@@ -32,21 +25,7 @@ FOUND 1 ERROR AFFECTING 1 LINE
  233 | ERROR | Missing @return tag in function comment
 ----------------------------------------------------------------------
 
-
-FILE: /home/wwwroot/app/src/Security/Voter/TaskVoter.php
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-FOUND 4 ERRORS AFFECTING 2 LINES
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 151 | ERROR | [ ] Doc comment for parameter "$subject" missing
- 154 | ERROR | [x] Group annotations together so that annotations of the same type immediately follow each other, and annotations of a different type are separated by a single
-     |       |     blank line
- 154 | ERROR | [ ] Doc comment for parameter $user does not match actual variable name $subject
- 154 | ERROR | [x] Expected 1 spaces after parameter name; 4 found
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Time: 2.41 secs; Memory: 10MB
+Time: 2.42 secs; Memory: 10MB
 
  ----------- ---------- --------------------------------- --------------------------------- 
   State       Domain     Id                                Message Preview (en)             
@@ -59,7 +38,7 @@ Time: 2.41 secs; Memory: 10MB
  ------- -------- ---- ---------------------- ------------------------------- 
 
 [notice] Migrating up to DoctrineMigrations\Version20240626105517
-[notice] finished in 2695.5ms, used 24M memory, 14 migrations executed, 31 sql queries
+[notice] finished in 2973.2ms, used 24M memory, 14 migrations executed, 31 sql queries
 
  [OK] Successfully migrated to version: DoctrineMigrations\Version20240626105517                                        
 
