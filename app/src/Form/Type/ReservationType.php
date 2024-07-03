@@ -24,6 +24,7 @@ class ReservationType extends AbstractType
      * @var string|null
      */
     public $userEmail;
+
     /**
      * Constructor.
      *

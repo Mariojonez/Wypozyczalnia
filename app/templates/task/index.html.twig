@@ -46,7 +46,6 @@
                     <td>{{ task.updatedAt|format_date('long') }}</td>
                     <td>{{ task.title }}</td>
                     <td>{{ task.category.title }}</td>
-{#                    <td>{{ task.author }}</td>#}
                     <td>
                         {% if is_granted('VIEW', task) %}
                             <a class="btn btn-primary btn-sm" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">

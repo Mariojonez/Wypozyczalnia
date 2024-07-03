@@ -39,7 +39,7 @@
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>
-                        {% if is_granted('SHOW', category) %}
+                        {% if is_granted('VIEW_CATEGORY', category) %}
                         <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}" class="btn btn-primary btn-sm">
                             {{ 'action.show'|trans }}
                         </a>
@@ -55,11 +55,11 @@
                             </a>
                         {% endif %}
                         {% if is_granted('CREATE_CATEGORY', category) %}
-                        <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}" class="btn btn-primary btn-sm">
-                            {{ 'action.create'|trans }}
-                        </a>
+                            <a class="btn btn-primary btn-sm" href="{{ url('category_create', {id: category.id}) }}" title="{{ 'action.create'|trans }}">
+                                {{ 'action.create'|trans }}
+                            </a>
                         {% endif %}
-                        {% if is_granted('VIEW', category) %}
+                        {% if is_granted('VIEW_CATEGORY', category) %}
                         <a href="{{ url('category_show_tasks', {id: category.id}) }}" title="{{ 'action.show_tasks'|trans }}" class="btn btn-primary btn-sm">
                             {{ 'action.show_tasks'|trans }}
                         </a>

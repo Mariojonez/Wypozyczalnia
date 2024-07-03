@@ -12,7 +12,6 @@ use App\Service\TaskServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -63,6 +62,7 @@ class CategoryController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
+    #[IsGranted('VIEW_CATEGORY', subject: 'category')]
     public function show(Category $category): Response
     {
         return $this->render('category/show.html.twig', ['category' => $category]);
@@ -80,7 +80,7 @@ class CategoryController extends AbstractController
         name: 'category_create',
         methods: 'GET|POST',
     )]
-    #[IsGranted('CREATE_CATEOGRY', subject: 'category')]
+    #[IsGranted('ROLE_ADMIN')]
     public function create(Request $request): Response
     {
         $category = new Category();
@@ -210,6 +210,7 @@ class CategoryController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
+    #[IsGranted('VIEW_CATEGORY', subject: 'category')]
     public function showTasks(Category $category): Response
     {
         $tasks = $this->taskService->getTasksByCategory($category);

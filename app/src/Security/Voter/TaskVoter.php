@@ -47,13 +47,6 @@ class TaskVoter extends Voter
     private const CREATE = 'CREATE';
 
     /**
-     * Show permission.
-     *
-     * @const string
-     */
-    private const SHOW = 'SHOW';
-
-    /**
      * Edit category permission.
      *
      * @const string
@@ -66,6 +59,13 @@ class TaskVoter extends Voter
      * @const string
      */
     private const DELETE_CATEGORY = 'DELETE_CATEGORY';
+
+    /**
+     * View category permission.
+     *
+     * @const string
+     */
+    private const VIEW_CATEGORY = 'VIEW_CATEGORY';
 
     /**
      * Create category permission.
@@ -98,7 +98,7 @@ class TaskVoter extends Voter
      */
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::CREATE, self::SHOW, self::EDIT_CATEGORY, self::DELETE_CATEGORY, self::CREATE_CATEGORY, self::CHANGE_STATUS, self::LIST])
+        return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE, self::CREATE, self::EDIT_CATEGORY, self::DELETE_CATEGORY, self::VIEW_CATEGORY, self::CREATE_CATEGORY, self::CHANGE_STATUS, self::LIST])
             && ($subject instanceof Task || $subject instanceof Category || $subject instanceof Reservation || $subject instanceof User);
     }
 
@@ -125,9 +125,9 @@ class TaskVoter extends Voter
             self::DELETE => $this->canDelete($subject, $user),
             self::CREATE => $this->canCreate($user),
             self::VIEW => $this->canView($subject, $user),
-            self::SHOW => $this->canView($subject, $user),
             self::EDIT_CATEGORY => $this->canEditCategory($subject, $user),
             self::DELETE_CATEGORY => $this->canDeleteCategory($subject, $user),
+            self::VIEW_CATEGORY => $this->canViewCategory($subject, $user),
             self::CREATE_CATEGORY => $this->canCreateCategory($user),
             self::CHANGE_STATUS => $this->canChangeStatus($subject, $user),
             self::LIST => $this->canList($user),
@@ -151,10 +151,12 @@ class TaskVoter extends Voter
     /**
      * Checks if user can view task.
      *
-     * @param UserInterface $user    User
+     * @param Task          $task Task entity
+     * @param UserInterface $user User
+     *
      * @return bool Result
      */
-    private function canView(mixed $subject, UserInterface $user): bool
+    private function canView(Task $task, UserInterface $user): bool
     {
         return true;
     }
@@ -233,6 +235,19 @@ class TaskVoter extends Voter
     private function canEditCategory(Category $category, UserInterface $user): bool
     {
         return $this->isAdmin($user);
+    }
+
+    /**
+     * Checks if user can view category.
+     *
+     * @param Category      $category Category entity
+     * @param UserInterface $user     User
+     *
+     * @return bool Result
+     */
+    private function canViewCategory(Category $category, UserInterface $user): bool
+    {
+        return true;
     }
 
     /**
