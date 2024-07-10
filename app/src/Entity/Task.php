@@ -230,13 +230,9 @@ class Task
      * Set the author of this entity.
      *
      * @param User|null $author the author to set for this entity
-     *
-     * @return static
      */
-    public function setAuthor(?User $author): static
+    public function setAuthor(?User $author): void
     {
         $this->author = $author;
-
-        return $this;
     }
 }

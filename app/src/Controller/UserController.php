@@ -22,7 +22,7 @@ class UserController extends AbstractController
      * @param UserRepository $userRepository User repository
      * @param UserInterface  $user           Current user
      *
-     * @return Response
+     * @return Response HTTP response
      */
     #[\Symfony\Component\Routing\Attribute\Route('/users', name: 'user_list', methods: ['GET'])]
     #[IsGranted('LIST', subject: 'user')]

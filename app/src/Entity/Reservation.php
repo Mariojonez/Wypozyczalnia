@@ -123,15 +123,11 @@ class Reservation
     /**
      * Setter for comment.
      *
-     * @param string|null $comment comment
-     *
-     * @return static
+     * @param string|null $comment Comment
      */
-    public function setComment(?string $comment): static
+    public function setComment(?string $comment): void
     {
         $this->comment = $comment;
-
-        return $this;
     }
 
     /**
@@ -148,13 +144,9 @@ class Reservation
      * Setter for status.
      *
      * @param string $status Status
-     *
-     * @return static
      */
-    public function setStatus(string $status): static
+    public function setStatus(string $status): void
     {
         $this->status = $status;
-
-        return $this;
     }
 }
